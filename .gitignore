@@ -1,0 +1,15 @@
+#venv
+env
+.env
+
+@"
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
