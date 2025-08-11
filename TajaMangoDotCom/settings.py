@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     "debug_toolbar",
+    'django_filters',
     'rest_framework',
     'djoser',
     'api',
     'user',
+    'product',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 INTERNAL_IPS = [
 
     "127.0.0.1",
@@ -142,8 +147,12 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #     'django_filters.rest_framework.DjangoFilterBackend'
+    # ]
 }
+
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
