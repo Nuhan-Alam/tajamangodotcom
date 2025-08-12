@@ -10,11 +10,15 @@ from product.paginations import DefaultPagination
 from api.permissions import IsAdminOrReadOnly
 from product.permissions import IsReviewAuthorOrReadonly
 from drf_yasg.utils import swagger_auto_schema
-
-
+from rest_framework.decorators import action
+from order.services import OrderService
+from rest_framework.response import Response
+from order.serializers import QuantitySerializer
+from rest_framework import status
+from order.models import CartItem
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    # serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProductFilter
     pagination_class = DefaultPagination
@@ -41,6 +45,64 @@ class ProductViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         """Only authenticated admin can create product"""
         return super().create(request, *args, **kwargs)
+    
+    @action(detail=True, methods=['get'])
+    def add_to_cart(self, request, pk=None):
+        product = self.get_object()
+        # Get quantity from request data for POST, default to 1 for GET
+        if request.method == 'POST':
+            serializer = QuantitySerializer(data=request.data)
+            if serializer.is_valid():
+                quantity = serializer.validated_data['quantity']
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:  # GET request
+            quantity = 1
+        try:
+            cart_item = OrderService.add_to_cart(product=product, user=request.user, quantity=quantity)
+            return Response({
+                        'status': f'{quantity} x {product.name} added to your cart',
+                        'cart_item_quantity': cart_item.quantity
+                    })
+        except Exception as e:
+            return Response(
+                {'error': str(e)}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    
+    @action(detail=True, methods=['get','post'])
+    def buy_now(self, request, pk=None):
+        product = self.get_object() 
+        serializer = QuantitySerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            order = OrderService.buy_now(
+                product=product,
+                user=request.user,
+                quantity=serializer.validated_data['quantity'],
+            )
+            
+            return Response({
+                'message': f'Order created successfully!',
+                'order_id': str(order.id),
+                'total_amount': order.total_price,
+                'status': order.status
+            }, status=status.HTTP_201_CREATED)
+            
+        except Exception as e:
+            return Response(
+                {'error': str(e)}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    
+    def get_serializer_class(self):
+        if self.action == 'add_to_cart' and self.request.method == 'POST':
+            return QuantitySerializer
+        if self.action == 'buy_now' and self.request.method == 'POST':
+            return QuantitySerializer
+        return ProductSerializer
 
 
 class ProductImageViewSet(ModelViewSet):
