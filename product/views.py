@@ -16,6 +16,9 @@ from rest_framework.response import Response
 from order.serializers import QuantitySerializer
 from rest_framework import status
 from order.models import CartItem
+
+
+
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     # serializer_class = ProductSerializer
@@ -70,18 +73,22 @@ class ProductViewSet(ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
     
-    @action(detail=True, methods=['get','post'])
+    @action(detail=True, methods=['get'])
     def buy_now(self, request, pk=None):
-        product = self.get_object() 
-        serializer = QuantitySerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+        product = self.get_object()
+        if request.method == "POST":
+            serializer = QuantitySerializer(data=request.data)
+            if serializer.is_valid():
+                quantity = serializer.validated_data['quantity']
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            quantity =1
         try:
             order = OrderService.buy_now(
                 product=product,
                 user=request.user,
-                quantity=serializer.validated_data['quantity'],
+                quantity=quantity,
             )
             
             return Response({

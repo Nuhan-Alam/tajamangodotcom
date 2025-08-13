@@ -3,80 +3,24 @@
     "model": "product.category",
     "pk": 1,
     "fields": {
-      "name": "Electronics",
-      "description": "Devices and gadgets"
+      "name": "Premium Indian Mangoes",
+      "description": "High-quality mango varieties from different parts of India."
     }
   },
   {
     "model": "product.category",
     "pk": 2,
     "fields": {
-      "name": "Books",
-      "description": "Printed and digital books"
+      "name": "Tropical Mangoes",
+      "description": "Mangoes grown in tropical climates outside of India."
     }
   },
   {
     "model": "product.category",
     "pk": 3,
     "fields": {
-      "name": "Clothing",
-      "description": "Men's and women's apparel"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 4,
-    "fields": {
-      "name": "Home Appliances",
-      "description": "Appliances for household use"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 5,
-    "fields": {
-      "name": "Sports",
-      "description": "Sports equipment and accessories"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 6,
-    "fields": {
-      "name": "Toys",
-      "description": "Children's toys and games"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 7,
-    "fields": {
-      "name": "Beauty",
-      "description": "Cosmetics and skincare products"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 8,
-    "fields": {
-      "name": "Furniture",
-      "description": "Home and office furniture"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 9,
-    "fields": {
-      "name": "Music",
-      "description": "Musical instruments and accessories"
-    }
-  },
-  {
-    "model": "product.category",
-    "pk": 10,
-    "fields": {
-      "name": "Stationery",
-      "description": "Office and school supplies"
+      "name": "Local Mangoes",
+      "description": "Locally grown fresh mango varieties."
     }
   },
 
@@ -84,332 +28,130 @@
     "model": "product.product",
     "pk": 1,
     "fields": {
-      "name": "Smartphone X",
-      "description": "Latest smartphone with high-end features",
-      "price": "999.99",
-      "stock": 50,
-      "category": 1,
-      "created_at": "2025-08-01T10:00:00Z",
-      "updated_at": "2025-08-01T10:00:00Z"
-    }
-  },
-  {
-    "model": "product.product",
-    "pk": 2,
-    "fields": {
-      "name": "Laptop Pro",
-      "description": "Powerful laptop for professionals",
-      "price": "1499.50",
-      "stock": 30,
-      "category": 1,
-      "created_at": "2025-08-01T10:05:00Z",
-      "updated_at": "2025-08-01T10:05:00Z"
-    }
-  },
-  {
-    "model": "product.product",
-    "pk": 3,
-    "fields": {
-      "name": "Wireless Earbuds",
-      "description": "Noise-cancelling wireless earbuds",
-      "price": "199.99",
+      "name": "Alphonso Mango",
+      "description": "Sweet and creamy Indian mango from Ratnagiri.",
+      "price": "8.99",
       "stock": 100,
       "category": 1,
-      "created_at": "2025-08-01T10:10:00Z",
-      "updated_at": "2025-08-01T10:10:00Z"
+      "created_at": "2025-08-13T10:00:00Z",
+      "updated_at": "2025-08-13T10:00:00Z"
     }
   },
   {
     "model": "product.product",
-    "pk": 4,
+    "pk": 2,
     "fields": {
-      "name": "Fiction Novel",
-      "description": "Bestselling fiction novel",
-      "price": "15.99",
-      "stock": 200,
-      "category": 2,
-      "created_at": "2025-08-01T10:15:00Z",
-      "updated_at": "2025-08-01T10:15:00Z"
+      "name": "Kesar Mango",
+      "description": "Bright orange flesh with a rich sweetness from Gujarat.",
+      "price": "7.50",
+      "stock": 120,
+      "category": 1,
+      "created_at": "2025-08-13T10:05:00Z",
+      "updated_at": "2025-08-13T10:05:00Z"
     }
   },
   {
     "model": "product.product",
-    "pk": 5,
+    "pk": 3,
     "fields": {
-      "name": "Winter Jacket",
-      "description": "Warm and stylish winter jacket",
-      "price": "89.99",
-      "stock": 80,
-      "category": 3,
-      "created_at": "2025-08-01T10:20:00Z",
-      "updated_at": "2025-08-01T10:20:00Z"
-    }
-  },
-  {
-    "model": "product.product",
-    "pk": 6,
-    "fields": {
-      "name": "Microwave Oven",
-      "description": "Compact and efficient microwave oven",
-      "price": "120.00",
-      "stock": 40,
-      "category": 4,
-      "created_at": "2025-08-01T10:25:00Z",
-      "updated_at": "2025-08-01T10:25:00Z"
-    }
-  },
-  {
-    "model": "product.product",
-    "pk": 7,
-    "fields": {
-      "name": "Football",
-      "description": "Official size and weight football",
-      "price": "25.50",
+      "name": "Dasheri Mango",
+      "description": "Long-shaped North Indian mango with a honey-like taste.",
+      "price": "6.80",
       "stock": 150,
-      "category": 5,
-      "created_at": "2025-08-01T10:30:00Z",
-      "updated_at": "2025-08-01T10:30:00Z"
+      "category": 1,
+      "created_at": "2025-08-13T10:10:00Z",
+      "updated_at": "2025-08-13T10:10:00Z"
     }
   },
   {
     "model": "product.product",
-    "pk": 8,
+    "pk": 4,
     "fields": {
-      "name": "Teddy Bear",
-      "description": "Soft plush teddy bear",
-      "price": "18.75",
+      "name": "Himsagar Mango",
+      "description": "Juicy mango from West Bengal with no fibrous texture.",
+      "price": "9.20",
       "stock": 90,
-      "category": 6,
-      "created_at": "2025-08-01T10:35:00Z",
-      "updated_at": "2025-08-01T10:35:00Z"
+      "category": 1,
+      "created_at": "2025-08-13T10:15:00Z",
+      "updated_at": "2025-08-13T10:15:00Z"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 5,
+    "fields": {
+      "name": "Kent Mango",
+      "description": "Tropical mango from Peru with sweet and juicy flesh.",
+      "price": "6.50",
+      "stock": 110,
+      "category": 2,
+      "created_at": "2025-08-13T10:20:00Z",
+      "updated_at": "2025-08-13T10:20:00Z"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 6,
+    "fields": {
+      "name": "Tommy Atkins Mango",
+      "description": "Mildly sweet mango popular in the Americas.",
+      "price": "5.90",
+      "stock": 130,
+      "category": 2,
+      "created_at": "2025-08-13T10:25:00Z",
+      "updated_at": "2025-08-13T10:25:00Z"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 7,
+    "fields": {
+      "name": "Ataulfo Mango",
+      "description": "Small golden mango from Mexico, buttery texture.",
+      "price": "7.10",
+      "stock": 95,
+      "category": 2,
+      "created_at": "2025-08-13T10:30:00Z",
+      "updated_at": "2025-08-13T10:30:00Z"
+    }
+  },
+  {
+    "model": "product.product",
+    "pk": 8,
+    "fields": {
+      "name": "Langra Mango",
+      "description": "Greenish skin with fibrous yet sweet pulp.",
+      "price": "6.20",
+      "stock": 140,
+      "category": 3,
+      "created_at": "2025-08-13T10:35:00Z",
+      "updated_at": "2025-08-13T10:35:00Z"
     }
   },
   {
     "model": "product.product",
     "pk": 9,
     "fields": {
-      "name": "Guitar",
-      "description": "Acoustic guitar for beginners",
-      "price": "150.00",
-      "stock": 20,
-      "category": 9,
-      "created_at": "2025-08-01T10:40:00Z",
-      "updated_at": "2025-08-01T10:40:00Z"
+      "name": "Neelum Mango",
+      "description": "Small, fragrant mango grown widely in South India.",
+      "price": "5.80",
+      "stock": 160,
+      "category": 3,
+      "created_at": "2025-08-13T10:40:00Z",
+      "updated_at": "2025-08-13T10:40:00Z"
     }
   },
   {
     "model": "product.product",
     "pk": 10,
     "fields": {
-      "name": "Notebook Set",
-      "description": "Set of 5 lined notebooks",
-      "price": "9.99",
-      "stock": 300,
-      "category": 10,
-      "created_at": "2025-08-01T10:45:00Z",
-      "updated_at": "2025-08-01T10:45:00Z"
-    }
-  },
-
-  {
-    "model": "product.productimage",
-    "pk": 1,
-    "fields": {
-      "product": 1,
-      "image": "products/images/smartphone.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 2,
-    "fields": {
-      "product": 2,
-      "image": "products/images/laptop.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 3,
-    "fields": {
-      "product": 3,
-      "image": "products/images/earbuds.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 4,
-    "fields": {
-      "product": 4,
-      "image": "products/images/novel.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 5,
-    "fields": {
-      "product": 5,
-      "image": "products/images/jacket.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 6,
-    "fields": {
-      "product": 6,
-      "image": "products/images/microwave.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 7,
-    "fields": {
-      "product": 7,
-      "image": "products/images/football.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 8,
-    "fields": {
-      "product": 8,
-      "image": "products/images/teddy.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 9,
-    "fields": {
-      "product": 9,
-      "image": "products/images/guitar.jpg"
-    }
-  },
-  {
-    "model": "product.productimage",
-    "pk": 10,
-    "fields": {
-      "product": 10,
-      "image": "products/images/notebooks.jpg"
-    }
-  },
-
-  {
-    "model": "product.review",
-    "pk": 1,
-    "fields": {
-      "product": 1,
-      "user": 1,
-      "ratings": 5,
-      "comment": "Excellent product!",
-      "created_at": "2025-08-01T11:00:00Z",
-      "updated_at": "2025-08-01T11:00:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 2,
-    "fields": {
-      "product": 2,
-      "user": 1,
-      "ratings": 4,
-      "comment": "Great value for the price.",
-      "created_at": "2025-08-01T11:05:00Z",
-      "updated_at": "2025-08-01T11:05:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 3,
-    "fields": {
-      "product": 3,
-      "user": 1,
-      "ratings": 4,
-      "comment": "Good sound quality.",
-      "created_at": "2025-08-01T11:10:00Z",
-      "updated_at": "2025-08-01T11:10:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 4,
-    "fields": {
-      "product": 4,
-      "user": 1,
-      "ratings": 5,
-      "comment": "Couldn’t put it down!",
-      "created_at": "2025-08-01T11:15:00Z",
-      "updated_at": "2025-08-01T11:15:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 5,
-    "fields": {
-      "product": 5,
-      "user": 1,
-      "ratings": 3,
-      "comment": "Warm but could be more stylish.",
-      "created_at": "2025-08-01T11:20:00Z",
-      "updated_at": "2025-08-01T11:20:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 6,
-    "fields": {
-      "product": 6,
-      "user": 1,
-      "ratings": 4,
-      "comment": "Works as expected.",
-      "created_at": "2025-08-01T11:25:00Z",
-      "updated_at": "2025-08-01T11:25:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 7,
-    "fields": {
-      "product": 7,
-      "user": 1,
-      "ratings": 5,
-      "comment": "Perfect for weekend games.",
-      "created_at": "2025-08-01T11:30:00Z",
-      "updated_at": "2025-08-01T11:30:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 8,
-    "fields": {
-      "product": 8,
-      "user": 1,
-      "ratings": 4,
-      "comment": "Very cuddly and cute.",
-      "created_at": "2025-08-01T11:35:00Z",
-      "updated_at": "2025-08-01T11:35:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 9,
-    "fields": {
-      "product": 9,
-      "user": 1,
-      "ratings": 5,
-      "comment": "Great sound and build quality.",
-      "created_at": "2025-08-01T11:40:00Z",
-      "updated_at": "2025-08-01T11:40:00Z"
-    }
-  },
-  {
-    "model": "product.review",
-    "pk": 10,
-    "fields": {
-      "product": 10,
-      "user": 1,
-      "ratings": 4,
-      "comment": "Good quality notebooks.",
-      "created_at": "2025-08-01T11:45:00Z",
-      "updated_at": "2025-08-01T11:45:00Z"
+      "name": "Banganapalli Mango",
+      "description": "Golden yellow mango from Andhra Pradesh with a rich taste.",
+      "price": "7.30",
+      "stock": 115,
+      "category": 3,
+      "created_at": "2025-08-13T10:45:00Z",
+      "updated_at": "2025-08-13T10:45:00Z"
     }
   }
 ]

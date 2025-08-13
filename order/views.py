@@ -8,11 +8,26 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.decorators import action
 from order.services import OrderService
 from rest_framework.response import Response
-
+from rest_framework import status
 
 class CartViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, GenericViewSet):
     serializer_class = CartSerializer
     permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        # Check if user already has a cart
+        existing_cart = Cart.objects.filter(user=request.user).first()
+        if existing_cart:
+            serializer = self.get_serializer(existing_cart)
+            return Response(
+                {
+                    "message": "User already has a cart. Returning existing cart.",
+                    "cart": serializer.data
+                }, 
+                status=status.HTTP_200_OK
+            )
+        # If no existing cart, proceed with normal creation
+        return super().create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -25,6 +40,7 @@ class CartViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, Gener
 
 class CartItemViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch', 'delete']
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
@@ -37,14 +53,10 @@ class CartItemViewSet(ModelViewSet):
         context = super().get_serializer_context()
         if getattr(self, 'swagger_fake_view', False):
             return context
-
         return {'cart_id': self.kwargs.get('cart_pk')}
 
     def get_queryset(self):
         return CartItem.objects.select_related('product').filter(cart_id=self.kwargs.get('cart_pk'))
-
-
-
 
 
 
