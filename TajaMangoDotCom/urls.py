@@ -13,7 +13,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="TajaMangoDotCom-API",
       default_version='v1',
-      description="Test description",
+      description="This project is a full-featured online marketplace dedicated to mango sales. Sellers can create detailed listings with images, descriptions, and prices, while buyers can browse, purchase instantly, and track orders through personal accounts. An admin dashboard will oversee listings and orders, ensuring smooth, secure, and efficient transactions.",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),
