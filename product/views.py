@@ -20,7 +20,6 @@ from order.models import CartItem
 
 
 class ProductViewSet(ModelViewSet):
-    queryset = Product.objects.all()
     # serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProductFilter
@@ -45,6 +44,10 @@ class ProductViewSet(ModelViewSet):
             400: "Bad Request"
         }
     )
+
+    def get_queryset(self):
+        return Product.objects.prefetch_related('images').all()
+
     def create(self, request, *args, **kwargs):
         """Only authenticated admin can create product"""
         return super().create(request, *args, **kwargs)
