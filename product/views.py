@@ -24,8 +24,8 @@ class ProductViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProductFilter
     pagination_class = DefaultPagination
-    # search_fields = ['name', 'description']
-    # ordering_fields = ['price', 'updated_at']
+    search_fields = ['name', 'description']
+    ordering_fields = ['price', 'updated_at']
     permission_classes = [IsAdminOrReadOnly]
 
     @swagger_auto_schema(
