@@ -21,11 +21,11 @@ from order.models import CartItem
 
 class ProductViewSet(ModelViewSet):
     # serializer_class = ProductSerializer
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend,SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
     pagination_class = DefaultPagination
     search_fields = ['name', 'description']
-    ordering_fields = ['price']
+    ordering_fields = ['price','updated_at']
     permission_classes = [IsAdminOrReadOnly]
 
     @swagger_auto_schema(
