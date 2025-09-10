@@ -25,7 +25,7 @@ class ProductViewSet(ModelViewSet):
     filterset_class = ProductFilter
     pagination_class = DefaultPagination
     search_fields = ['name', 'description']
-    ordering_fields = ['price', 'updated_at']
+    ordering_fields = ['price']
     permission_classes = [IsAdminOrReadOnly]
 
     @swagger_auto_schema(
