@@ -21,11 +21,14 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
-
+    category_id = serializers.PrimaryKeyRelatedField(
+        source="category", queryset=Category.objects.all(), write_only=True
+    )
+    category = CategorySerializer(read_only=True)  # nested for GET
     class Meta:
         model = Product
         fields = ['id', 'name', 'description', 'price',
-                  'stock', 'category', 'images']  # other
+                  'stock','category_id','category', 'images']  # other
 
 
     def validate_price(self, price):

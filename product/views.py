@@ -46,13 +46,18 @@ class ProductViewSet(ModelViewSet):
     )
 
     def get_queryset(self):
-        return Product.objects.prefetch_related('images').all()
+        return (
+        Product.objects
+        .select_related("category")   # fetch category in the same query
+        .prefetch_related("images")   # fetch product images in one go
+        .all()
+    )
 
     def create(self, request, *args, **kwargs):
         """Only authenticated admin can create product"""
         return super().create(request, *args, **kwargs)
     
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=['post'])
     def add_to_cart(self, request, pk=None):
         product = self.get_object()
         # Get quantity from request data for POST, default to 1 for GET
