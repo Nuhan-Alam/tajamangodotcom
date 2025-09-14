@@ -9,6 +9,9 @@ from rest_framework.decorators import action
 from order.services import OrderService
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from order.services import OrderService
+
 
 class CartViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, GenericViewSet):
     serializer_class = CartSerializer
@@ -21,7 +24,6 @@ class CartViewSet(CreateModelMixin, RetrieveModelMixin, DestroyModelMixin, Gener
             serializer = self.get_serializer(existing_cart)
             return Response(
                 {
-                    "message": "User already has a cart. Returning existing cart.",
                     "cart": serializer.data
                 }, 
                 status=status.HTTP_200_OK
@@ -108,3 +110,83 @@ class OrderViewset(ModelViewSet):
         if self.request.user.is_staff:
             return Order.objects.prefetch_related('items__product').all()
         return Order.objects.prefetch_related('items__product').filter(user=self.request.user)
+    
+
+
+
+# Payment-API
+from sslcommerz_lib import SSLCOMMERZ 
+from django.http import HttpResponseRedirect
+from rest_framework.decorators import api_view,permission_classes
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.conf import settings as main_settings
+
+@api_view(['POST'])
+def initiate_payment(request):
+    user = request.user
+    amount = request.data.get("amount")
+    order_id = request.data.get("orderId")
+    num_items = request.data.get("numItems")
+
+    settings = {'store_id': 'perso68c3b06f75828',
+                'store_pass': 'perso68c3b06f75828@ssl', 'issandbox': True}
+    sslcz = SSLCOMMERZ(settings)
+    post_body = {}
+    post_body['total_amount'] = amount
+    post_body['currency'] = "BDT"
+    post_body['tran_id'] = f"txn_{order_id}"
+    post_body['success_url'] = f"{main_settings.BACKEND_URL}/api/v1/payment/success/"
+    post_body['fail_url'] = f"{main_settings.BACKEND_URL}/api/v1/payment/fail/"
+    post_body['cancel_url'] = f"{main_settings.BACKEND_URL}/api/v1/payment/cancel/"
+    post_body['emi_option'] = 0
+    post_body['cus_name'] = f"{user.first_name} {user.last_name}"
+    post_body['cus_email'] = user.email
+    post_body['cus_phone'] = user.phone_number
+    post_body['cus_add1'] = user.address
+    post_body['cus_city'] = "Dhaka"
+    post_body['cus_country'] = "Bangladesh"
+    post_body['shipping_method'] = "NO"
+    post_body['multi_card_name'] = ""
+    post_body['num_of_item'] = num_items
+    post_body['product_name'] = "E-commerce Products"
+    post_body['product_category'] = "General"
+    post_body['product_profile'] = "general"
+
+    response = sslcz.createSession(post_body)  # API response
+    print(response)
+    if response.get("status") == 'SUCCESS':
+        return Response({"payment_url": response['GatewayPageURL']})
+    return Response({"error": "Payment initiation failed"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def payment_success(request):
+    print("Inside success")
+    cart_id = request.data.get("tran_id").split('_')[1]
+    cart = Cart.objects.get(id=cart_id)
+    order =OrderService.create_order(cart.user.id, cart_id=cart_id)
+    order.payment_method = 'Online payment'
+    order.save()
+    return HttpResponseRedirect(f"{main_settings.FRONTEND_URL}/dashboard/orders/success")
+
+
+@api_view(['POST'])
+def payment_cancel(request):
+    return HttpResponseRedirect(f"{main_settings.FRONTEND_URL}/dashboard/cart/")
+
+
+@api_view(['POST'])
+def payment_fail(request):
+    print("Inside fail")
+    return HttpResponseRedirect(f"{main_settings.FRONTEND_URL}/dashboard/cart/failed")
+
+
+class HasOrderedProduct(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, product_id):
+        user = request.user
+        has_ordered = OrderItem.objects.filter(
+            order__user=user, product_id=product_id).exists()
+        return Response({"hasOrdered": has_ordered})

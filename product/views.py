@@ -16,7 +16,7 @@ from rest_framework.response import Response
 from order.serializers import QuantitySerializer
 from rest_framework import status
 from order.models import CartItem
-
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductViewSet(ModelViewSet):
@@ -57,7 +57,7 @@ class ProductViewSet(ModelViewSet):
         """Only authenticated admin can create product"""
         return super().create(request, *args, **kwargs)
     
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['post'],permission_classes=[IsAuthenticated])
     def add_to_cart(self, request, pk=None):
         product = self.get_object()
         # Get quantity from request data for POST, default to 1 for GET
@@ -81,7 +81,7 @@ class ProductViewSet(ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
     
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=['get'],permission_classes=[IsAuthenticated])
     def buy_now(self, request, pk=None):
         product = self.get_object()
         if request.method == "POST":

@@ -57,7 +57,7 @@ class Order(models.Model):
     status = models.CharField(
         max_length=20, choices=STATUS_CHOICES, default=PENDING)
     payment_method = models.CharField(
-        max_length=20, choices=PAYMENT_METHOD, default=ONLINE_PAYMENT)
+        max_length=20, choices=PAYMENT_METHOD, default=CASH_ON_DELIVERY)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
