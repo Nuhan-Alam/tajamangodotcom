@@ -128,7 +128,9 @@ def initiate_payment(request):
     amount = request.data.get("amount")
     order_id = request.data.get("orderId")
     num_items = request.data.get("numItems")
-
+    address = request.data.get("shippingAddress")
+    phone = request.data.get("phoneNum")
+    userName = request.data.get("nserName")
     settings = {'store_id': 'perso68c3b06f75828',
                 'store_pass': 'perso68c3b06f75828@ssl', 'issandbox': True}
     sslcz = SSLCOMMERZ(settings)
@@ -140,10 +142,10 @@ def initiate_payment(request):
     post_body['fail_url'] = f"{main_settings.BACKEND_URL}/api/v1/payment/fail/"
     post_body['cancel_url'] = f"{main_settings.BACKEND_URL}/api/v1/payment/cancel/"
     post_body['emi_option'] = 0
-    post_body['cus_name'] = f"{user.first_name} {user.last_name}"
+    post_body['cus_name'] = userName
     post_body['cus_email'] = user.email
-    post_body['cus_phone'] = user.phone_number
-    post_body['cus_add1'] = user.address
+    post_body['cus_phone'] = phone
+    post_body['cus_add1'] = address
     post_body['cus_city'] = "Dhaka"
     post_body['cus_country'] = "Bangladesh"
     post_body['shipping_method'] = "NO"
