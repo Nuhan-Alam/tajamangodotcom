@@ -27,8 +27,42 @@ SECRET_KEY = 'django-insecure-!=fc_oxgg8f#n-b3e1o%s9hhxa@a$*joq#(1n)1!ewlyy-su32
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#AnyOne can use the API Now
-CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS Configuration
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Vite default
+    "http://127.0.0.1:5173",
+    config("FRONTEND_URL", default="http://localhost:5173"),  # From your env
+]
+
+# Alternative: For development only, you can use:
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# Allow credentials to be included in CORS requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Headers that are allowed during the actual request
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# Methods that are allowed during the actual request
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 ALLOWED_HOSTS = ['.vercel.app','127.0.0.1']
 AUTH_USER_MODEL = 'user.User'
